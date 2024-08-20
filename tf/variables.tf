@@ -16,6 +16,7 @@
 
 variable "project_id" {
   type = string
+  default = ${{ vars.SERVICE }}
 }
 
 variable "locations" {

@@ -45,7 +45,7 @@ module "lb-http" {
 
 resource "google_compute_region_network_endpoint_group" "sneg-${{ vars.SERVICE }}" {
 #  provider              = google-beta
-  name                  = "sneg-${{ vars.SERVICE }}"
+  name                  = "${{ vars.SERVICE }}-sneg0"
   network_endpoint_type = "SERVERLESS"
   region                = var.region_us
   cloud_run {
@@ -130,8 +130,8 @@ resource "google_compute_url_map" "default" {
   }
 }
 
-resource "google_compute_backend_service" "default" {
-  name        = "kidsflix-backend-global"
+resource "google_compute_backend_service" "${{ vars.SERVICE }}-backend-service-lb0" {
+  name        = "${{ vars.SERVICE }}-backend-service-lb0"
   port_name   = "http"
   protocol    = "HTTP"
   timeout_sec = 10
